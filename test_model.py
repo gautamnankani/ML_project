@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 
 from keras.layers import Convolution2D
@@ -7,20 +7,26 @@ from keras.layers import Flatten
 from keras.layers import Dense
 from keras.models import Sequential
 model = Sequential()
+#SHYP1
 model.add(Convolution2D(filters=32, 
                         kernel_size=(3,3), 
                         activation='relu',
                    input_shape=(64, 64, 3)
                        ))
+#EHYP1
 model.summary()
 model.add(MaxPooling2D(pool_size=(2, 2)))
+#SHYP2
 model.add(Convolution2D(filters=32, 
                         kernel_size=(3,3), 
                         activation='relu',
                        ))
+#EHYP2
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
+#SHYP3
 model.add(Dense(units=128, activation='relu'))
+#EHYP3
 model.add(Dense(units=1, activation='sigmoid'))
 model.summary()
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
@@ -43,10 +49,10 @@ test_set = test_datagen.flow_from_directory(
         target_size=(64, 64),
         batch_size=32,
         class_mode='binary')
-model.fit(
+history=model.fit(
         training_set,
-        steps_per_epoch=8000,
-        epochs=25,
+        steps_per_epoch=800,
+        epochs=1,
         validation_data=test_set,
         validation_steps=800)
 
@@ -54,7 +60,7 @@ model.fit(
 model.save('my.h5')
 
 from keras.models import load_model
-m = load_model('cnn-cat-dog-model.h5')
+m = load_model('my.h5')
 from keras.preprocessing import image
 test_image = image.load_img('cnn_dataset/single_prediction/cat_or_dog_2.jpg', 
                target_size=(64,64))
