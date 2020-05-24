@@ -1,9 +1,11 @@
+#!/usr/bin/python3
+
 import yaml
 import re
 class CNN():
     def __init__(self,dir_path,counter,config):
-        with open(dir_path+'/'+'new_file.py','w') as new_file:
-            with open(dir_path+'/'+'model_train.py','r') as old_file:
+        with open(dir_path+'new_file.py','w') as new_file:
+            with open(dir_path+'test_model.py','r') as old_file:
                 for key in config['HyperParameter'].keys():
                     print("key:",key)
                     change_this_line=""
@@ -56,4 +58,5 @@ yaml_file=open('config.yml')
 config=yaml.load(yaml_file, Loader= yaml.FullLoader)
 for counter in range(config['Counter']):
     CNN('../',counter,config)
+    os.system("chmod +x ../new_file.py")
     os.system("python3 ../new_file.py")
