@@ -74,4 +74,4 @@ config=yaml.load(yaml_file, Loader= yaml.FullLoader)
 for counter in range(config['Counter']):
     tuned_file_constructor('./',counter,config)
     os.system("chmod +x new_file.py")
-    os.system("python new_file.py")
+    os.system("./new_file.py")
