@@ -65,7 +65,7 @@ with open('stats.csv','a') as stats_file:
     writer.writerow(additional_data)
 
 model.save('../saved_models/model{}.h5'.format(counter))
-""".format(config['ModelFitVariable'],hyp_para_parsing,counter)
+""".format(config['ModelFitVariable'],hyp_para_parsing,counter,counter)
     return cnn_lines
 
                         
