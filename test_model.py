@@ -40,12 +40,12 @@ train_datagen = ImageDataGenerator(
         horizontal_flip=True)
 test_datagen = ImageDataGenerator(rescale=1./255)
 training_set = train_datagen.flow_from_directory(
-        'cnn_dataset/training_set/',
+        '../dataset/training_set/',
         target_size=(64, 64),
         batch_size=32,
         class_mode='binary')
 test_set = test_datagen.flow_from_directory(
-        'cnn_dataset/test_set/',
+        '../dataset/test_set/',
         target_size=(64, 64),
         batch_size=32,
         class_mode='binary')
@@ -57,18 +57,14 @@ history=model.fit(
         validation_steps=800)
 
 
-model.save('my.h5')
-
-from keras.models import load_model
-m = load_model('my.h5')
 from keras.preprocessing import image
-test_image = image.load_img('cnn_dataset/single_prediction/cat_or_dog_2.jpg', 
-               target_size=(64,64))
+test_image = image.load_img('../dataset/single_prediction/cat_or_dog_2.jpg', 
+        target_size=(64,64))
 test_image = image.img_to_array(test_image)
 
 import numpy as np 
 test_image = np.expand_dims(test_image, axis=0)
-result = m.predict(test_image)
+result = model.predict(test_image)
 
 
 r = training_set.class_indices
