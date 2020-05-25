@@ -71,6 +71,7 @@ model.save('../saved_models/model{}.h5'.format(counter))
                         
 
 import os
+os.chdir('/workspace/ML_project')
 yaml_file=open('config.yml')
 config=yaml.load(yaml_file, Loader= yaml.FullLoader)
 for counter in range(config['Counter']):
