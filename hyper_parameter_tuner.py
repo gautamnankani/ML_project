@@ -55,8 +55,9 @@ def cnn_kind(config, counter):
         hyp_para_parsing+='  |  '
     cnn_lines="""
 import csv
-with open('stats.csv','a') as stats_file:
+with open('/workspace/saved_models/stats.csv','a') as stats_file:
     additional_data= {0}.history
+    additional_data['stats_name']={3}
     additional_data['HyperParameter']="{1}"
     additional_data['Serial_No']={2}
     writer=csv.DictWriter(stats_file,fieldnames=[x for x in additional_data])
@@ -64,7 +65,7 @@ with open('stats.csv','a') as stats_file:
         writer.writeheader()
     writer.writerow(additional_data)
 
-model.save('../saved_models/{3}/model{2}.h5')
+model.save('/workspace/saved_models/{3}{2}.h5')
 """.format(config['ModelFitVariable'],hyp_para_parsing,counter,config['Name'])
     return cnn_lines
 
@@ -74,8 +75,6 @@ import os
 os.chdir('/workspace/ML_project')
 yaml_file=open('config.yml')
 config=yaml.load(yaml_file, Loader= yaml.FullLoader)
-if config['Name'] not in os.listdir('../saved_models'):
-    os.mkdir('../saved_models/{}'.format(config['Name']))
 for counter in range(config['Counter']):
     tuned_file_constructor('./',counter,config)
     os.system("chmod +x new_file.py")
