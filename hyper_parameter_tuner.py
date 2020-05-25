@@ -55,7 +55,7 @@ def cnn_kind(config, counter):
         hyp_para_parsing+='  |  '
     cnn_lines="""
 import csv
-with open('/workspace/saved_models/stats.csv','a') as stats_file:
+with open('/workspace/saved_models/stats_{3}.csv','a') as stats_file:
     additional_data= {0}.history
     additional_data['stats_name']='{3}'
     additional_data['HyperParameter']="{1}"
@@ -65,7 +65,7 @@ with open('/workspace/saved_models/stats.csv','a') as stats_file:
         writer.writeheader()
     writer.writerow(additional_data)
 
-model.save('/workspace/saved_models/{3}{2}.h5')
+model.save('/workspace/saved_models/model_{3}{2}.h5')
 """.format(config['ModelFitVariable'],hyp_para_parsing,counter,config['Name'])
     return cnn_lines
 
