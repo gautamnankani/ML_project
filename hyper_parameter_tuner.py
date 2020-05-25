@@ -57,7 +57,7 @@ def cnn_kind(config, counter):
 import csv
 with open('/workspace/saved_models/stats.csv','a') as stats_file:
     additional_data= {0}.history
-    additional_data['stats_name']={3}
+    additional_data['stats_name']='{3}'
     additional_data['HyperParameter']="{1}"
     additional_data['Serial_No']={2}
     writer=csv.DictWriter(stats_file,fieldnames=[x for x in additional_data])
