@@ -72,10 +72,11 @@ model.save('/workspace/saved_models/model_{3}{2}.h5')
                         
 
 import os
+import sys
 os.chdir('/workspace/ML_project')
 yaml_file=open('config.yml')
 config=yaml.load(yaml_file, Loader= yaml.FullLoader)
-for counter in range(config['Counter']):
+for counter in range(int(sys.argv[1]),config['Counter']):
     tuned_file_constructor('./',counter,config)
     os.system("chmod +x new_file.py")
     os.system("./new_file.py")
