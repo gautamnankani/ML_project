@@ -74,7 +74,8 @@ import os
 os.chdir('/workspace/ML_project')
 yaml_file=open('config.yml')
 config=yaml.load(yaml_file, Loader= yaml.FullLoader)
-os.mkdir('../saved_models/{}'.format(config['Name']))
+if config['Name'] not in os.listdir('../saved_models'):
+    os.mkdir('../saved_models/{}'.format(config['Name']))
 for counter in range(config['Counter']):
     tuned_file_constructor('./',counter,config)
     os.system("chmod +x new_file.py")
