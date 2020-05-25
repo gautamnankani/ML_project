@@ -2,7 +2,7 @@
 # constrints: all the variables in function shold have "," after the value eg:- (var=val,)
 #In cnn: model.fit must be stored in a variable and the variable name must be written here in ModelFitVariable 
 
-
+Name: First_model
 Kind: CNN
 Counter: 2
 ModelFitVariable: history
