@@ -56,6 +56,7 @@ history=model.fit(
         validation_data=test_set,
         validation_steps=800)
 
+accuracy=history.history['accuracy']
 
 from keras.preprocessing import image
 test_image = image.load_img('../dataset/single_prediction/cat_or_dog_2.jpg', 

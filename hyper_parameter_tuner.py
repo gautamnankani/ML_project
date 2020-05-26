@@ -56,17 +56,18 @@ def cnn_kind(config, counter):
     cnn_lines="""
 import csv
 with open('/workspace/saved_models/stats_{3}.csv','a') as stats_file:
-    additional_data= {0}.history
+    additional_data= dict()
+    additional_data['accuracy']= {0}
     additional_data['stats_name']='{3}'
     additional_data['HyperParameter']="{1}"
     additional_data['Serial_No']={2}
-    writer=csv.DictWriter(stats_file,fieldnames=[x for x in additional_data], delimiter= ':')
+    writer=csv.DictWriter(stats_file,fieldnames=[f_name for f_name in additional_data], delimiter= ':')
     if additional_data['Serial_No']==0:
         writer.writeheader()
     writer.writerow(additional_data)
 
 model.save('/workspace/saved_models/model_{3}{2}.h5')
-""".format(config['ModelFitVariable'],hyp_para_parsing,counter,config['Name'])
+""".format(config['AccuracyVariable'],hyp_para_parsing,counter,config['Name'])
     return cnn_lines
 
                         
