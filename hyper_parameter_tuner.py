@@ -28,9 +28,7 @@ def tuned_file_constructor(dir_path,counter,config):
                     # HyperParameters changed
                     # therefore copying the rest of code as it is
                     new_file.write(old_file.read())
-                    if config['Kind']=="CNN":
-                        # If it is cnn code: the below block will be added to maintain database
-                        new_file.writelines(cnn_kind(config, counter))
+                    new_file.writelines(construct_stats(config, counter))
                 old_file.close()
             new_file.close()
 
@@ -45,7 +43,7 @@ def line_replacer(config,change_this_line,key):
         change_this_line=re.sub(pattern,"{}= {},".format(arg,replace_value),change_this_line)
         return change_this_line
     
-def cnn_kind(config, counter):
+def construct_stats(config, counter):
     """This function returns the lines that let us maintain the database(accuracy with hyper parameter)"""
     hyp_para_parsing=""
     for param in config['HyperParameter']:
