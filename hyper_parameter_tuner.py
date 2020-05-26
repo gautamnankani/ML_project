@@ -55,7 +55,7 @@ def construct_stats(config, counter):
 import csv
 with open('/workspace/saved_models/stats_{3}.csv','a') as stats_file:
     additional_data= dict()
-    additional_data['accuracy']= {0}
+    additional_data['accuracy']= str({0})
     additional_data['stats_name']='{3}'
     additional_data['HyperParameter']="{1}"
     additional_data['Serial_No']={2}
@@ -64,15 +64,17 @@ with open('/workspace/saved_models/stats_{3}.csv','a') as stats_file:
         writer.writeheader()
     writer.writerow(additional_data)
 
-model.save('/workspace/saved_models/model_{3}{2}.h5')
 """.format(config['AccuracyVariable'],hyp_para_parsing,counter,config['Name'])
+    if 'Kind' in config:
+        if config['Kind']=="CNN":
+            cnn_lines+="model.save('/workspace/saved_models/model_{}{}.h5')".format(config['Name'],counter)
     return cnn_lines
 
                         
 
 import os
 import sys
-os.chdir('/workspace/ML_project')
+os.chdir('/workspace/{}'.format(sys.argv[2]))
 yaml_file=open('config.yml')
 config=yaml.load(yaml_file, Loader= yaml.FullLoader)
 for counter in range(int(sys.argv[1]),config['Counter']):
